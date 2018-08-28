@@ -1,0 +1,58 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#"  #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+
+<#@ import namespace="System.IO" #>
+<#@ output extension=".cs" #>
+
+using Orchard.Core.Settings.Metadata;
+using Orchard.Data;
+using Orchard.Data.Migration;
+using Orchard.ContentManagement.MetaData;
+using Orchard.Core.Contents.Extensions;
+using System;
+
+namespace Sample.Template
+{
+    public class Migrations : DataMigrationImpl
+    {
+        <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
+        
+        public int Create()
+        {
+            ContentDefinitionManager.AlterTypeDefinition("<#Write(jsonFile["ContentTypeName"].ToString());#>", builder =>
+             builder
+			<#for(int i = 0; i<jsonFile["WithPart"].Count(); i++){#>
+						
+			.WithPart("<#Write(jsonFile["WithPart"][i].ToString());#>")
+			
+            <#}#>
+
+	<#if((bool)jsonFile["Creatable"]==true)#>
+	.Creatable()
+	<#if((bool)jsonFile["Draftable"]==true)#>
+	.Draftable()
+	<#if((bool)jsonFile["Listable"]==true)#>
+	.Listable()
+	<#if((bool)jsonFile["Securable"]==true){#>
+	.Securable()
+	
+				<#}#>);
+            
+
+	SchemaBuilder.CreateTable("<#Write(jsonFile["TableName"].ToString());#>", table =>
+    table
+		
+	<#for(int i = 0;i<jsonFile["TableColumn"].Count();i++){#>
+	.Column<<#Write(jsonFile["TableColumn"][i]["Type"].ToString());#>>("<#Write(jsonFile["TableColumn"][i]["PropName"].ToString());#>")<#}#>);
+
+
+
+
+            return 1;
+	
+        }
+    }
+}

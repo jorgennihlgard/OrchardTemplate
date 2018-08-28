@@ -1,0 +1,30 @@
+﻿{
+  "ContentTypeName": "CoffeCup",
+  "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
+
+  "Creatable": true,
+  "Draftable": true,
+  "Listable": true,
+  "Securable": false,
+
+  "TableName": "TableName",
+
+  "TableColumn": [
+    {
+      "Type": "int",
+      "PropName": "YearReleased"
+    },
+    {
+      "Type": "string",
+      "PropName": "TagLine"
+    },
+    {
+      "Type": "string",
+      "PropName": "Keywords"
+    }
+
+  ]
+
+
+
+}

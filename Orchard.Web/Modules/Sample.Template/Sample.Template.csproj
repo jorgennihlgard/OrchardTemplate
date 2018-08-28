@@ -124,6 +124,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewClass.cs</LastGenOutput>
     </Content>
+    <Content Include="NewTable.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NewTable.txt</LastGenOutput>
+    </Content>
+    <Content Include="NewTable.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewTable.tt</DependentUpon>
+    </Content>
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="packages.config" />

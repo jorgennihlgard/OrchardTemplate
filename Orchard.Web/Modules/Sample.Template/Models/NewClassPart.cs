@@ -2,8 +2,8 @@
 
 using Orchard.ContentManagement.Records;
 
-namespace Pluralsight.Movies.Models {
-    public class MyTableRecord : ContentPartRecord {
+namespace Sample.Template.Models {
+    public class MyTablePartRecord : ContentPartRecord {
 
 	public virtual int YearReleased{ get; set; }
 	public virtual string TagLine{ get; set; }

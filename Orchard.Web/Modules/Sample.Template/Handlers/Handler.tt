@@ -8,21 +8,25 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 
-
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
 
+<#	var str = jsonFile["TableName"].ToString();
+var parameterName = Char.ToLowerInvariant(str[0]) + str.Substring(1);
+#>
 using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
+using Orchard.ContentManagement.Handlers;
+using Orchard.Data;
+using Orchard.Indexing;
+using Sample.Template.Models;
 
-namespace Pluralsight.Movies.Models {
-    public class <#=jsonFile["TableName"]#> : ContentPart<<#=jsonFile["TableName"]#>Record> {
-        
-	<#for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#>
-	public <#=jsonFile["TableColumn"][i]["Type"] + " " + jsonFile["TableColumn"][i]["PropName"]#> {
-		get { return Record.<#=jsonFile["TableColumn"][i]["PropName"]#>; }
-		set { Record.<#=jsonFile["TableColumn"][i]["PropName"]#> = value; }
-        }
-		<#}#>
-    }
+namespace Pluralsight.Movies.Handlers {
+
+    public class <#=jsonFile["ContentPart"]#>Handler : ContentHandler {
+      
+        public <#=jsonFile["ContentPart"]#>Handler(IRepository<<#=jsonFile["TableName"]#>Record> <#=parameterName#>Repository){
+            Filters.Add(StorageFilter.For(<#=parameterName#>Repository));
+		}
+	}
 }

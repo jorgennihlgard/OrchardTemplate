@@ -1,0 +1,20 @@
+﻿
+@using Sample.Template.Models
+@model MyTablePart
+
+@{
+    Script.Require("jQuery");
+}
+
+<fieldset>
+    <legend>@T("Details")</legend>
+	    @Html.LabelFor(m => m.YearReleased, T("YearReleased"))
+    @Html.TextBoxFor(m => m.YearReleased)
+    @Html.LabelFor(m => m.TagLine, T("TagLine"))
+    @Html.TextBoxFor(m => m.TagLine)
+    @Html.LabelFor(m => m.Keywords, T("Keywords"))
+    @Html.TextBoxFor(m => m.Keywords)
+    @Html.LabelFor(m => m.Name, T("Name"))
+    @Html.TextBoxFor(m => m.Name)
+    <span class="hint">Enter multiple keywords separated by commas. This is used to generate the Similar Movies list.</span>
+</fieldset>

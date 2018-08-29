@@ -1,0 +1,47 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+using System.Linq;
+using Orchard.ContentManagement;
+using Orchard.ContentManagement.Drivers;
+using Orchard.Data;
+using Sample.Template.Models;
+//using Sample.Template.Services;
+//using Sample.Template.ViewModels;
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
+	//In Drivers folder
+
+namespace Sample.Template.Drivers {
+    public class <#=jsonFile["TableName"]#>Driver : ContentPartDriver<<#=jsonFile["TableName"]#>> {
+       
+
+        protected override string Prefix {
+            get { return "<#=jsonFile["RazorTemplate"]#>"; }
+        }
+
+        protected override DriverResult Display(<#=jsonFile["TableName"]#> part, string displayType, dynamic shapeHelper) {
+            return ContentShape("Parts_Movie",
+			() => shapeHelper.Parts_Movie(MoviePart: part));
+        }
+
+        // GET
+        protected override DriverResult Editor(<#=jsonFile["TableName"]#> part, dynamic shapeHelper) {
+            return ContentShape("Parts_<#=jsonFile["ShapeName"]#>_Edit", () =>
+                shapeHelper.EditorTemplate(TemplateName: "Parts/<#=jsonFile["RazorTemplate"]#>", Model:part, Prefix: Prefix));
+        }
+
+		// POST
+        protected override DriverResult Editor(<#=jsonFile["TableName"]#> part, IUpdateModel updater, dynamic shapeHelper) {
+            updater.TryUpdateModel(part, Prefix, null, null);
+            return Editor(part, shapeHelper);
+        }
+	}
+}

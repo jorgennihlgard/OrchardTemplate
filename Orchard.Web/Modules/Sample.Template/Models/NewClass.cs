@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
 
-namespace Pluralsight.Movies.Models {
-    public class MyTable : ContentPart<MyTableRecord> {
+namespace Sample.Template.Models {
+    public class MyTablePart : ContentPart<MyTablePartRecord> {
         
 		public int YearReleased {
 		get { return Record.YearReleased; }

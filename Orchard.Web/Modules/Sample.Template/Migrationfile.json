@@ -8,7 +8,7 @@
   "Securable": false,
 
 
-  "TableName": "MyTable",
+  "TableName": "MyTablePart",
 
   "TableColumn": [
     {
@@ -28,8 +28,13 @@
       "PropName": "Name"
     }
 
-  ]
+  ],
+  //Custom ContentPart in migration
+  "ContentPart": "MyContentPart",
 
+  //Add in Placement.info + Driver
+  "ShapeName" : "Parts_MyContent_Edit",  
+
+  "RazorTemplate" : "MyView"
 }
 
-//<#="public virtual " + jsonFile["TableColumn"][i]["Type"].ToString() + " " + jsonFile["TableColumn"][i]["PropName"].ToString() +  "{ get; set; }"#><#}#>

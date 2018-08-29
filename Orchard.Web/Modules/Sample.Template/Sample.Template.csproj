@@ -100,18 +100,28 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\Driver.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Driver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\Handler.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Handler.tt</DependentUpon>
+    </Compile>
     <Compile Include="Migrations.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Migrations.tt</DependentUpon>
     </Compile>
     <Compile Include="Migrationstest.cs" />
-    <Compile Include="NewClass.cs">
+    <Compile Include="Models\NewClass.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewClass.tt</DependentUpon>
     </Compile>
-    <Compile Include="NewClassPart.cs">
+    <Compile Include="Models\NewClassPart.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewClassPart.tt</DependentUpon>
@@ -121,21 +131,33 @@
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\Styles.less" />
+    <Content Include="Drivers\Driver.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Driver.cs</LastGenOutput>
+    </Content>
+    <Content Include="Handlers\Handler.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Handler.cs</LastGenOutput>
+    </Content>
     <Content Include="Migrations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Migrations.cs</LastGenOutput>
     </Content>
-    <Content Include="NewClassPart.tt">
+    <Content Include="Models\NewClassPart.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewClassPart.cs</LastGenOutput>
     </Content>
-    <Content Include="NewClass.tt">
+    <Content Include="Models\NewClass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewClass.cs</LastGenOutput>
     </Content>
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="packages.config" />
+    <Content Include="Views\EditorTemplates\Parts\MyView.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyView.cshtml</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -143,8 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migrationfile.json" />
@@ -161,6 +181,16 @@
       <Project>{9916839c-39fc-4ceb-a5af-89ca7e87119f}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\MyView.cshtml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyView.tt</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

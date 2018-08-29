@@ -7,7 +7,7 @@ using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using System;
 
-namespace Sample.Template $safeprojectname$
+namespace Sample.Template 
 {
     public class Migrations : DataMigrationImpl
     {
@@ -35,8 +35,8 @@ namespace Sample.Template $safeprojectname$
 	);
             
 
-	SchemaBuilder.CreateTable("MyTable", table =>
-    table
+	SchemaBuilder.CreateTable("MyTablePartRecord", table =>
+    table.ContentPartRecord()
 		
 		.Column<int>("YearReleased")
 		.Column<string>("TagLine")
@@ -44,9 +44,8 @@ namespace Sample.Template $safeprojectname$
 		.Column<string>("Name")
 );
 
-
-
-
+ContentDefinitionManager.AlterTypeDefinition("CoffeCup", builder =>
+builder.WithPart("MyTablePart"));
             return 1;
 	
         }

@@ -8,21 +8,15 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 
-
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
 
-using System.Collections.Generic;
-using System.Linq;
-using Orchard.ContentManagement;
+using Orchard.ContentManagement.Records;
 
 namespace Pluralsight.Movies.Models {
-    public class <#=jsonFile["TableName"]#> : ContentPart<<#=jsonFile["TableName"]#>Record> {
-        
-	<#for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#>
-	public <#=jsonFile["TableColumn"][i]["Type"] + " " + jsonFile["TableColumn"][i]["PropName"]#> {
-		get { return Record.<#=jsonFile["TableColumn"][i]["PropName"]#>; }
-		set { Record.<#=jsonFile["TableColumn"][i]["PropName"]#> = value; }
-        }
-		<#}#>
+    public class <#=jsonFile["TableName"].ToString()#>Record : ContentPartRecord {
+
+<#for(int i = 0; i<jsonFile["TableColumn"].Count();i++){#>
+	public virtual <#=jsonFile["TableColumn"][i]["Type"].ToString() + " " + jsonFile["TableColumn"][i]["PropName"].ToString()#>{ get; set; }
+<#}#>  
     }
 }

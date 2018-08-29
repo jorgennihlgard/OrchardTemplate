@@ -111,6 +111,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NewClass.tt</DependentUpon>
     </Compile>
+    <Compile Include="NewClassPart.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewClassPart.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,18 +125,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Migrations.cs</LastGenOutput>
     </Content>
+    <Content Include="NewClassPart.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NewClassPart.cs</LastGenOutput>
+    </Content>
     <Content Include="NewClass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewClass.cs</LastGenOutput>
-    </Content>
-    <Content Include="NewTable.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>NewTable.txt</LastGenOutput>
-    </Content>
-    <Content Include="NewTable.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NewTable.tt</DependentUpon>
     </Content>
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />

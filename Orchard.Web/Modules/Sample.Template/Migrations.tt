@@ -14,7 +14,7 @@ using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using System;
 
-namespace Sample.Template
+namespace Sample.Template $safeprojectname$
 {
     public class Migrations : DataMigrationImpl
     {
@@ -22,11 +22,11 @@ namespace Sample.Template
         
         public int Create()
         {
-            ContentDefinitionManager.AlterTypeDefinition("<#Write(jsonFile["ContentTypeName"].ToString());#>", builder =>
+            ContentDefinitionManager.AlterTypeDefinition("<#=jsonFile["ContentTypeName"].ToString()#>", builder =>
              builder
 			<#for(int i = 0; i<jsonFile["WithPart"].Count(); i++){#>
 						
-			.WithPart("<#Write(jsonFile["WithPart"][i].ToString());#>")
+			.WithPart("<#=jsonFile["WithPart"][i].ToString()#>")
 			
             <#}#>
 
@@ -42,11 +42,12 @@ namespace Sample.Template
 				<#}#>);
             
 
-	SchemaBuilder.CreateTable("<#Write(jsonFile["TableName"].ToString());#>", table =>
+	SchemaBuilder.CreateTable("<#=jsonFile["TableName"].ToString()#>", table =>
     table
 		
-	<#for(int i = 0;i<jsonFile["TableColumn"].Count();i++){#>
-	.Column<<#Write(jsonFile["TableColumn"][i]["Type"].ToString());#>>("<#Write(jsonFile["TableColumn"][i]["PropName"].ToString());#>")<#}#>);
+<#for(int i = 0;i<jsonFile["TableColumn"].Count();i++){#>
+		.Column<<#=jsonFile["TableColumn"][i]["Type"].ToString()#>>("<#=jsonFile["TableColumn"][i]["PropName"].ToString()#>")
+<#}#>);
 
 
 

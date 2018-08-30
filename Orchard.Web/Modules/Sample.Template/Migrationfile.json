@@ -1,5 +1,5 @@
 ﻿{
-  "ContentTypeName": "CoffeCup",
+  "ContentTypeName": "KaffeKopp",
   "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
 
   "Creatable": true,
@@ -8,33 +8,48 @@
   "Securable": false,
 
 
-  "TableName": "MyTablePart",
+  "TableName": "KaffeKoppPart",
 
   "TableColumn": [
     {
+      "Version": 1,
       "Type": "int",
-      "PropName": "YearReleased"
+      "PropName": "Deciliter"
     },
     {
+      "Version": 1,
       "Type": "string",
-      "PropName": "TagLine"
+      "PropName": "Handtag"
     },
     {
+     "Version": 1,
       "Type": "string",
-      "PropName": "Keywords"
+      "PropName": "Färg"
     },
     {
+      "Version": 1,
       "Type": "string",
-      "PropName": "Name"
+      "PropName": "Namn"
     }
 
   ],
-  //Custom ContentPart in migration
-  "ContentPart": "MyContentPart",
 
-  //Add in Placement.info + Driver
-  "ShapeName" : "Parts_MyContent_Edit",  
+  //Driver.cs  Add in Placement.info
+  "ShapeType":
+  {
+    "Name": "Parts_MyContent_Edit",
+    "Content": 10
+  },  
 
-  "RazorTemplate" : "MyView"
+  //Driver.cs   
+  "TemplateView": "TemplateView",
+
+  //Driver.cs
+  "ShapeView": 
+  {
+    "Name": "ShapeView",
+    "Content": 5
+
+  }
 }
 

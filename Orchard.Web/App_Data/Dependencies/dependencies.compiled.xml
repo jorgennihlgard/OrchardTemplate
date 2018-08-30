@@ -298,7 +298,7 @@
     <ExtensionId>Sample.Template</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Sample.Template/bin/Sample.Template.dll</VirtualPath>
-    <Hash>2650fdedede361de</Hash>
+    <Hash>2650fea706efba35</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>SysCache</ExtensionId>

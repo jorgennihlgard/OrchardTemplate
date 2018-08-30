@@ -1,0 +1,20 @@
+﻿
+@using Sample.Template.Models
+@model KaffeKoppPart
+
+@{
+    Script.Require("jQuery");
+}
+
+<fieldset>
+    <legend>@T("Details")</legend>
+	    @Html.LabelFor(m => m.Deciliter, T("Deciliter"))
+    @Html.TextBoxFor(m => m.Deciliter)
+    @Html.LabelFor(m => m.Handtag, T("Handtag"))
+    @Html.TextBoxFor(m => m.Handtag)
+    @Html.LabelFor(m => m.Färg, T("Färg"))
+    @Html.TextBoxFor(m => m.Färg)
+    @Html.LabelFor(m => m.Namn, T("Namn"))
+    @Html.TextBoxFor(m => m.Namn)
+    <span class="hint">Enter multiple keywords separated by commas. This is used to generate the Similar Movies list.</span>
+</fieldset>

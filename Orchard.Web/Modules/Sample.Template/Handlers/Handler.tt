@@ -21,11 +21,11 @@ using Orchard.Data;
 using Orchard.Indexing;
 using Sample.Template.Models;
 
-namespace Pluralsight.Movies.Handlers {
+namespace Sample.Template.Handlers {
 
-    public class <#=jsonFile["ContentPart"]#>Handler : ContentHandler {
+    public class <#=jsonFile["ContentTypeName"]#>Handler : ContentHandler {
       
-        public <#=jsonFile["ContentPart"]#>Handler(IRepository<<#=jsonFile["TableName"]#>Record> <#=parameterName#>Repository){
+        public <#=jsonFile["ContentTypeName"]#>Handler(IRepository<<#=jsonFile["TableName"]#>Record> <#=parameterName#>Repository){
             Filters.Add(StorageFilter.For(<#=parameterName#>Repository));
 		}
 	}

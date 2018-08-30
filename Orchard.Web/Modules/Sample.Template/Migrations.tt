@@ -20,6 +20,8 @@ namespace Sample.Template
     {
         <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
         
+		
+
         public int Create()
         {
             ContentDefinitionManager.AlterTypeDefinition("<#=jsonFile["ContentTypeName"]#>", builder =>
@@ -54,5 +56,18 @@ builder.WithPart("<#=jsonFile["TableName"]#>"));
             return 1;
 	
         }
+
     }
 }
+<#+				
+class MigratïonVersion
+{ 
+	
+	public void LatestVersion ()
+	{
+
+	}
+}
+		#>
+
+

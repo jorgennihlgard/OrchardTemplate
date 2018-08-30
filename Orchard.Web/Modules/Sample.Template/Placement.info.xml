@@ -2,4 +2,5 @@
 
 <Placement>
   <Place Parts_MyContent_Edit="Content:10"/>
+  <Place Parts_ShapeView="Content:5"/>
 </Placement>

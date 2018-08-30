@@ -8,12 +8,12 @@ using Orchard.Data;
 using Orchard.Indexing;
 using Sample.Template.Models;
 
-namespace Pluralsight.Movies.Handlers {
+namespace Sample.Template.Handlers {
 
-    public class MyContentPartHandler : ContentHandler {
+    public class KaffeKoppHandler : ContentHandler {
       
-        public MyContentPartHandler(IRepository<MyTablePartRecord> myTablePartRepository){
-            Filters.Add(StorageFilter.For(myTablePartRepository));
+        public KaffeKoppHandler(IRepository<KaffeKoppPartRecord> kaffeKoppPartRepository){
+            Filters.Add(StorageFilter.For(kaffeKoppPartRepository));
 		}
 	}
 }

@@ -1,0 +1,16 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".xml" #>
+<?xml version="1.0" encoding="utf-8" ?>
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
+<Placement>
+  <Place Parts_MyContent_Edit="Content:<#=jsonFile["ShapeType"]["Content"]#>"/>
+  <Place Parts_<#=jsonFile["ShapeView"]["Name"]#>="Content:<#=jsonFile["ShapeView"]["Content"]#>"/>
+</Placement>

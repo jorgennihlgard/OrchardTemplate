@@ -10,26 +10,26 @@ using Sample.Template.Models;
 	//In Drivers folder
 
 namespace Sample.Template.Drivers {
-    public class MyTablePartDriver : ContentPartDriver<MyTablePart> {
+    public class KaffeKoppPartDriver : ContentPartDriver<KaffeKoppPart> {
        
 
         protected override string Prefix {
-            get { return "MyView"; }
+            get { return "TemplateView"; }
         }
 
-        protected override DriverResult Display(MyTablePart part, string displayType, dynamic shapeHelper) {
-            return ContentShape("Parts_Movie",
-			() => shapeHelper.Parts_Movie(MoviePart: part));
+        protected override DriverResult Display(KaffeKoppPart part, string displayType, dynamic shapeHelper) {
+            return ContentShape("Parts_ShapeView",
+			() => shapeHelper.Parts_ShapeView(Part: part));
         }
 
         // GET
-        protected override DriverResult Editor(MyTablePart part, dynamic shapeHelper) {
-            return ContentShape("Parts_Parts_MyContent_Edit_Edit", () =>
-                shapeHelper.EditorTemplate(TemplateName: "Parts/MyView", Model:part, Prefix: Prefix));
+        protected override DriverResult Editor(KaffeKoppPart part, dynamic shapeHelper) {
+            return ContentShape("Parts_MyContent_Edit", () =>
+                shapeHelper.EditorTemplate(TemplateName: "Parts/TemplateView", Model:part, Prefix: Prefix));
         }
 
 		// POST
-        protected override DriverResult Editor(MyTablePart part, IUpdateModel updater, dynamic shapeHelper) {
+        protected override DriverResult Editor(KaffeKoppPart part, IUpdateModel updater, dynamic shapeHelper) {
             updater.TryUpdateModel(part, Prefix, null, null);
             return Editor(part, shapeHelper);
         }

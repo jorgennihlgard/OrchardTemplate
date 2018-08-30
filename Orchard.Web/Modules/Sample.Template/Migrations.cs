@@ -12,9 +12,11 @@ namespace Sample.Template
     public class Migrations : DataMigrationImpl
     {
                 
+		
+
         public int Create()
         {
-            ContentDefinitionManager.AlterTypeDefinition("CoffeCup", builder =>
+            ContentDefinitionManager.AlterTypeDefinition("KaffeKopp", builder =>
              builder
 									
 			.WithPart("CommonPart")
@@ -35,19 +37,20 @@ namespace Sample.Template
 	);
             
 
-	SchemaBuilder.CreateTable("MyTablePartRecord", table =>
+	SchemaBuilder.CreateTable("KaffeKoppPartRecord", table =>
     table.ContentPartRecord()
 		
-		.Column<int>("YearReleased")
-		.Column<string>("TagLine")
-		.Column<string>("Keywords")
-		.Column<string>("Name")
+		.Column<int>("Deciliter")
+		.Column<string>("Handtag")
+		.Column<string>("Färg")
+		.Column<string>("Namn")
 );
 
-ContentDefinitionManager.AlterTypeDefinition("CoffeCup", builder =>
-builder.WithPart("MyTablePart"));
+ContentDefinitionManager.AlterTypeDefinition("KaffeKopp", builder =>
+builder.WithPart("KaffeKoppPart"));
             return 1;
 	
         }
+
     }
 }

@@ -24,18 +24,18 @@ namespace Sample.Template.Drivers {
        
 
         protected override string Prefix {
-            get { return "<#=jsonFile["RazorTemplate"]#>"; }
+            get { return "<#=jsonFile["TemplateView"]#>"; }
         }
 
         protected override DriverResult Display(<#=jsonFile["TableName"]#> part, string displayType, dynamic shapeHelper) {
-            return ContentShape("Parts_Movie",
-			() => shapeHelper.Parts_Movie(MoviePart: part));
+            return ContentShape("Parts_<#=jsonFile["ShapeView"]["Name"]#>",
+			() => shapeHelper.Parts_<#=jsonFile["ShapeView"]["Name"]#>(Part: part));
         }
 
         // GET
         protected override DriverResult Editor(<#=jsonFile["TableName"]#> part, dynamic shapeHelper) {
-            return ContentShape("Parts_<#=jsonFile["ShapeName"]#>_Edit", () =>
-                shapeHelper.EditorTemplate(TemplateName: "Parts/<#=jsonFile["RazorTemplate"]#>", Model:part, Prefix: Prefix));
+            return ContentShape("<#=jsonFile["ShapeType"]["Name"]#>", () =>
+                shapeHelper.EditorTemplate(TemplateName: "Parts/<#=jsonFile["TemplateView"]#>", Model:part, Prefix: Prefix));
         }
 
 		// POST

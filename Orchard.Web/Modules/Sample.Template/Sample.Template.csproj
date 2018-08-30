@@ -151,12 +151,25 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NewClass.cs</LastGenOutput>
     </Content>
+    <Content Include="Placement.info.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Placement.info.xml</LastGenOutput>
+    </Content>
+    <Content Include="Placement.info.xml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Placement.info.tt</DependentUpon>
+    </Content>
     <Content Include="Styles\Styles.css" />
     <Content Include="Styles\Styles.min.css" />
     <Content Include="packages.config" />
-    <Content Include="Views\EditorTemplates\Parts\MyView.tt">
+    <Content Include="Views\EditorTemplates\Parts\TemplateView.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyView.cshtml</LastGenOutput>
+      <LastGenOutput>TemplateView.cshtml</LastGenOutput>
+    </Content>
+    <Content Include="Views\Parts\ShapeView.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ShapeView.cshtml</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -183,13 +196,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Placement.info" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\MyView.cshtml">
+    <Content Include="Views\EditorTemplates\Parts\TemplateView.cshtml">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyView.tt</DependentUpon>
+      <DependentUpon>TemplateView.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\ShapeView.cshtml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShapeView.tt</DependentUpon>
     </Content>
   </ItemGroup>
   <PropertyGroup>

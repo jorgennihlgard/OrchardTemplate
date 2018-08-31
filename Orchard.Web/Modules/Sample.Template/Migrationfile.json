@@ -1,4 +1,5 @@
 ﻿{
+  
   "ContentTypeName": "KaffeKopp",
   "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
 
@@ -9,6 +10,8 @@
 
 
   "TableName": "KaffeKoppPart",
+
+  "CurrentMigrationNr": 3,
 
   "TableColumn": [
     {
@@ -22,7 +25,7 @@
       "PropName": "Handtag"
     },
     {
-     "Version": 1,
+      "Version": 1,
       "Type": "string",
       "PropName": "Färg"
     },
@@ -30,23 +33,42 @@
       "Version": 1,
       "Type": "string",
       "PropName": "Namn"
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "NewProp1"
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "NewProp2"
+    },
+    {
+      "Version": 3,
+      "Type": "string",
+      "PropName": "NewProp3"
+    },
+    {
+      "Version": 3,
+      "Type": "string",
+      "PropName": "NewProp4"
     }
+
 
   ],
 
   //Driver.cs  Add in Placement.info
-  "ShapeType":
-  {
+  "ShapeType": {
     "Name": "Parts_MyContent_Edit",
     "Content": 10
-  },  
+  },
 
-  //Driver.cs   
+  //Driver.cs
   "TemplateView": "TemplateView",
 
   //Driver.cs
-  "ShapeView": 
-  {
+  "ShapeView": {
     "Name": "ShapeView",
     "Content": 5
 

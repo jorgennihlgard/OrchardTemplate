@@ -1,6 +1,9 @@
 ﻿<#@ template debug="true" hostspecific="false" language="C#"  #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
+<#@ assembly name="envdte" #>
+<#@ assembly name="envdte80" #>
+<#@ import namespace="EnvDTE" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Newtonsoft.Json.Linq" #>
 
@@ -14,60 +17,82 @@ using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Contents.Extensions;
 using System;
 
-namespace Sample.Template 
+namespace Sample.Template
 {
     public class Migrations : DataMigrationImpl
     {
         <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Sample.Template/Migrationfile.json"));#>
-        
-		
+        <# int version = (int)jsonFile["CurrentMigrationNr"];#>
 
-        public int Create()
+	
+		
+	<#	
+		CreateMethod1(1,jsonFile);
+				for (int i = 2 ; i<=version;i++){
+								
+					
+					CreateMethod2(i, jsonFile);
+							
+				}
+	#>
+		}
+}
+       
+<#+ void CreateMethod1(int version,JObject jsonFile){ #>
+
+
+public int Create()
         {
             ContentDefinitionManager.AlterTypeDefinition("<#=jsonFile["ContentTypeName"]#>", builder =>
              builder
-			<#for(int i = 0; i<jsonFile["WithPart"].Count(); i++){#>
+			<#+for(int i = 0; i<jsonFile["WithPart"].Count(); i++){#>
 						
 			.WithPart("<#=jsonFile["WithPart"][i].ToString()#>")
 			
-            <#}#>
+            <#+}#>
 
-	<#if((bool)jsonFile["Creatable"]==true)#>
+	<#+if((bool)jsonFile["Creatable"]==true)#>
 	.Creatable()
-	<#if((bool)jsonFile["Draftable"]==true)#>
+	<#+if((bool)jsonFile["Draftable"]==true)#>
 	.Draftable()
-	<#if((bool)jsonFile["Listable"]==true)#>
+	<#+if((bool)jsonFile["Listable"]==true)#>
 	.Listable()
-	<#if((bool)jsonFile["Securable"]==true){#>
+	<#+if((bool)jsonFile["Securable"]==true){#>
 	.Securable()
 	
-				<#}#>);
+				<#+}#>);
             
 
 	SchemaBuilder.CreateTable("<#=jsonFile["TableName"]#>Record", table =>
     table.ContentPartRecord()
 		
-<#for(int i = 0;i<jsonFile["TableColumn"].Count();i++){#>
-		.Column<<#=jsonFile["TableColumn"][i]["Type"]#>>("<#=jsonFile["TableColumn"][i]["PropName"]#>")
-<#}#>);
+<#+for(int i = 0;i<jsonFile["TableColumn"].Count();i++){#>
+				<#+if((int)jsonFile["TableColumn"][i]["Version"] == version){#>
+				.Column<<#=jsonFile["TableColumn"][i]["Type"]#>>("<#=jsonFile["TableColumn"][i]["PropName"]#>")
+<#+}#>
+<#+}#>);
 
 ContentDefinitionManager.AlterTypeDefinition("<#=jsonFile["ContentTypeName"]#>", builder =>
 builder.WithPart("<#=jsonFile["TableName"]#>"));
             return 1;
 	
         }
+<#+ } #>
+<#+ void CreateMethod2(int i,JObject jsonFile){ #>
+public int UpdateFrom<#=i-1#>(){
 
-    }
-}
-<#+				
-class MigratïonVersion
-{ 
+
 	
-	public void LatestVersion ()
-	{
-
-	}
-}
-		#>
-
+<#+for(int j = 0; j < jsonFile["TableColumn"].Count(); j++){#>
+	<#+if((int)jsonFile["TableColumn"][j]["Version"] == i){#>
+	SchemaBuilder.AlterTable("<#=jsonFile["TableName"]#>Record", table =>
+	table.AddColumn<<#=jsonFile["TableColumn"][j]["Type"]#>>("<#=jsonFile["TableColumn"][j]["PropName"]#>"));
+								<#+}#>	
+							
+				<#+}#>
+           
+            return <#=i#>;
+	
+			}
+<#+ } #>
 

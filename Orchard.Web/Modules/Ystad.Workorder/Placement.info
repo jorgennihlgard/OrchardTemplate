@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Placement>
+  <Place Parts_WorkOrder_Edit="Content:10"/>
+  <Place Parts_WorkOrder="Content:5"/>
+</Placement>

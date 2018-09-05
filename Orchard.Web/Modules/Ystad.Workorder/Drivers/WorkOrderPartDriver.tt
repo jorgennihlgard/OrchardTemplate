@@ -1,0 +1,75 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+using System.Linq;
+using Orchard.ContentManagement;
+using Orchard.ContentManagement.Drivers;
+using Orchard.Data;
+using Ystad.Workorder.Models;
+using Ystad.Workorder.Services;
+using Ystad.Workorder.ViewModels;
+
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
+	//In Drivers folder
+
+namespace Ystad.Workorder.Drivers {
+    public class <#=jsonFile["TableName"]#>Driver : ContentPartDriver<<#=jsonFile["TableName"]#>> {
+       
+		  private readonly <#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["PrivateFieldName"]#>;
+
+            public <#=jsonFile["TableName"]#>Driver(
+                <#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["ParameterConstructor"]#> 
+            ) {
+                <#=jsonFile["EnumInterface"]["PrivateFieldName"]#> = <#=jsonFile["EnumInterface"]["ParameterConstructor"]#>;
+            }
+
+
+
+        protected override string Prefix {
+            get { return "<#=jsonFile["TemplateView"]#>"; }
+        }
+
+        protected override DriverResult Display(<#=jsonFile["TableName"]#> part, string displayType, dynamic shapeHelper) {
+            return ContentShape("Parts_<#=jsonFile["ShapeView"]["Name"]#>",
+			() => shapeHelper.Parts_<#=jsonFile["ShapeView"]["Name"]#>(Part: part));
+        }
+
+      
+
+		protected override DriverResult Editor(WorkOrderPart part, dynamic shapeHelper)
+        {
+            return ContentShape("<#=jsonFile["ShapeType"]["Name"]#>",
+                () => shapeHelper.EditorTemplate(
+                    TemplateName: "Parts/<#=jsonFile["TemplateView"]#>",
+                    Model: new <#=jsonFile["ViewModelName"]#>
+                    {
+                        <#=jsonFile["ViewModelProperties"][1]["Name"]#> = part,
+                        <#=jsonFile["ViewModelProperties"][0]["Name"]#> = <#=jsonFile["EnumInterface"]["PrivateFieldName"]#>.<#=jsonFile["EnumInterface"]["IEnumerableMethod"]#>(),
+                    },
+                    Prefix: Prefix));
+        }
+
+
+		
+
+		protected override DriverResult Editor(WorkOrderPart part, IUpdateModel updater, dynamic shapeHelper)
+        {
+			  var model = new <#=jsonFile["ViewModelName"]#>()
+			  {
+			      <#=jsonFile["ViewModelProperties"][1]["Name"]#> = part
+			  };
+			  if (updater.TryUpdateModel(model, Prefix, null, null))
+			   {
+			   }
+			    return Editor(part, shapeHelper);
+		    }
+	}
+}

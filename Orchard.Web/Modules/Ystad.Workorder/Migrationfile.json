@@ -1,0 +1,123 @@
+﻿{
+
+  "ContentTypeName": "WorkOrder",
+  "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
+
+  "Creatable": true,
+  "Draftable": true,
+  "Listable": true,
+  "Securable": false,
+
+
+  "TableName": "WorkOrderPart",
+
+  "CurrentMigrationNr": 4,
+
+  "TableColumn": [
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Equipment"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Location"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Department"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "MaintenanceGroup"  //Dropdown
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "MaintenanceType"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Customer"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "CustomerTelephone"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "CustomerContactPerson"
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "RegisteredBy"
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "PerformedBy"
+    },
+    {
+      "Version": 3,
+      "Type": "string",
+      "PropName": "Priority"
+    },
+    {
+      "Version": 3,
+      "Type": "string",
+      "PropName": "Protocol"
+    },
+    {
+      "Version": 4,
+      "Type": "PartsEnum",
+      "PropName": "MainParts"
+    }
+
+
+  ],
+
+  //Driver.cs  Add in Placement.info
+  "ShapeType": {
+    "Name": "Parts_WorkOrder_Edit",
+    "Content": 10
+  },
+
+  //Driver.cs
+  "TemplateView": "WorkOrder",
+
+  //Driver.cs
+  "ShapeView": {
+    "Name": "WorkOrder",
+    "Content": 5
+  },
+  //Driver.cs constructor and field
+  "EnumInterface": {
+    "InterfaceName": "IWorkOrderService",
+    "PrivateFieldName": "_workorderservice",
+    "ParameterConstructor": "workorderservice",
+    "IEnumerableMethod": "GetMaintenanceGroups"
+
+
+  },
+  "ViewModelName": "WorkOrderPartsViewModel",
+
+  "ViewModelProperties": [
+    {
+      "Type": "IEnumerable<SelectListItem>",
+      "Name": "MaintenanceGroups" // = Driver.cs Editor Method,  _interfacefield.Getmethod
+    },
+    {
+      "Type": "WorkOrderPart",  
+      "Name": "Part"    // = Driver.cs Editor Method, (WorkOrderPart part)
+    }
+  ]
+
+}
+

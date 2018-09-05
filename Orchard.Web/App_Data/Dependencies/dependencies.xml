@@ -2393,4 +2393,10 @@
     <LoaderName>CoreExtensionLoader</LoaderName>
     <References />
   </Dependency>
+  <Dependency>
+    <ModuleName>Ystad.Workorder</ModuleName>
+    <VirtualPath>~/Modules/Ystad.Workorder/bin/Ystad.Workorder.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
 </Dependencies>

@@ -298,7 +298,7 @@
     <ExtensionId>Sample.Template</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Sample.Template/bin/Sample.Template.dll</VirtualPath>
-    <Hash>2650ff719f917ca6</Hash>
+    <Hash>265103429be0dbbb</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>SysCache</ExtensionId>
@@ -317,5 +317,11 @@
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Upgrade/bin/Upgrade.dll</VirtualPath>
     <Hash>71600150b9625fee</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Ystad.Workorder</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Ystad.Workorder/bin/Ystad.Workorder.dll</VirtualPath>
+    <Hash>4907a33a38996271</Hash>
   </Dependency>
 </Dependencies>

@@ -1,0 +1,28 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+
+namespace Ystad.Workorder.Models
+{
+ <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/DropdownEnum.json"));#>
+
+
+public enum <#=jsonFile["EnumName"]#>
+{
+	<#string comma = ",";#>
+	<#for(int i = 0; i < jsonFile["Selection"].Count(); i++ ){#>
+		<#=jsonFile["Selection"][i] + comma#>
+					
+<#}#>
+
+}
+
+}
+//C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder

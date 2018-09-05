@@ -1,0 +1,21 @@
+﻿{
+
+  "Enums": [
+    {
+      "Name": "Parts",
+      "Selection": [ "Alt1", "Alt2" ]
+    },
+    {
+      "Name": "City",
+      "Selection": [ "Alt1", "Alt2" ]
+    }
+
+  ],
+
+
+
+  "EnumName": "PartsEnum",
+  "Selection": [ "None = 0", "Maintenance = 1 << 0", "EnviromentControl = 1 << 1" ]
+    
+   
+}

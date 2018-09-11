@@ -1,0 +1,55 @@
+﻿@{
+    // odd formatting in this file is to cause more attractive results in the output.
+    var items = Enumerable.Cast<dynamic>((System.Collections.IEnumerable)Model);
+}
+@{
+    if (!HasText(Model.Text))
+    {
+        @DisplayChildren(Model)
+    }
+    else
+    {
+        if ((bool)Model.Selected)
+        {
+            Model.Classes.Add("current");
+        }
+
+
+        @* morphing the shape to keep Model untouched*@
+Model.Metadata.Alternates.Clear();
+Model.Metadata.Type = "MenuItemLink";
+
+        @* render the menu item only if it has some content *@
+var renderedMenuItemLink = Display(Model);
+if (HasText(renderedMenuItemLink))
+{
+
+    if (items.Any())
+    {
+        if (Model.Parent.Level <= Model.Level || Model.Level == 1)
+        {
+            @*<li class="has-children @if ((bool)Model.Selected) { @Html.Raw("current"); }">*@
+            <li data-expanded="false">
+                <span class="k-sprite folder"></span>
+                @renderedMenuItemLink
+                @*<label for="@Model.Text">@renderedMenuItemLink</label>*@
+                <ul>
+                    @DisplayChildren(Model)
+                </ul>
+            </li>
+
+                }
+            }
+            else
+            {
+                <li @if ((bool)Model.Selected) { @Html.Raw("class=\"current\"")  ; }>
+                    <span class="k-sprite image"></span>
+                    @renderedMenuItemLink
+                </li>
+            }
+
+        }
+    }
+
+}
+

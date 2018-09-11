@@ -1,0 +1,130 @@
+﻿{
+  "ProjectName":  "Ystad.Orders",
+
+  "ContentTypeName": "Order",
+  "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
+
+  "Creatable": true,
+  "Draftable": true,
+  "Listable": true,
+  "Securable": false,
+
+
+  "TableName": "OrderPart",
+
+  "CurrentMigrationNr": 3,
+
+  "TableColumn": [
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Equipment",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Location",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Department",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "MaintenanceGroup",
+      "Enum": true,
+      "EnumName": "PartsEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "MaintenanceGroups", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetMaintenanceGroups"
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "MaintenanceType",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "Customer",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "CustomerTelephone",
+      "Enum": false
+    },
+    {
+      "Version": 1,
+      "Type": "string",
+      "PropName": "CustomerContactPerson",
+      "Enum": false
+
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "RegisteredBy",
+      "Enum": false
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "PerformedBy",
+      "Enum": false
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "Priority",
+      "Enum": true,
+      "EnumName": "PriorityEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "Priorities", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetPriorities"
+    },
+    {
+      "Version": 2,
+      "Type": "string",
+      "PropName": "Protocol",
+      "Enum": true,
+      "EnumName": "ProtocolEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "Protocols", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetProtocols"
+    }
+  ],
+
+  //Driver.cs  Add in Placement.info
+  "ShapeType": {
+    "Name": "Parts_Order_Edit",
+    "Content": 10
+  },
+
+  //Driver.cs
+  "TemplateView": "Order",
+
+  //Driver.cs
+  "ShapeView": {
+    "Name": "Order",
+    "Content": 5
+  },
+  //Driver.cs constructor and field
+  "EnumInterface": {
+    "InterfaceName": "IOrderService",
+    "PrivateFieldName": "_orderservice",
+    "ParameterConstructor": "orderservice"
+  },
+  "ViewModelName": "OrderPartsViewModel",
+
+  "ViewModelProperties": {
+    "Name": "Part" // = Driver.cs Editor Method, (WorkOrderPart part)
+  }
+}

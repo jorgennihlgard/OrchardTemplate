@@ -15,6 +15,8 @@ namespace Ystad.Workorder.Services
 
    public interface IWorkOrderService : IDependency
     {
-        IEnumerable<SelectListItem> GetMaintenanceGroups();
-    }
+														        IEnumerable<SelectListItem> GetMaintenanceGroups();
+																							        IEnumerable<SelectListItem> GetPriorities();
+					        IEnumerable<SelectListItem> GetProtocols();
+					    }
 }

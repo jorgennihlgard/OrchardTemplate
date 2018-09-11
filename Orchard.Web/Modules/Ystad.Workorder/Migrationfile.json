@@ -1,7 +1,6 @@
 ﻿{
-
   "ContentTypeName": "WorkOrder",
-  "WithPart": [ "CommonPart", "TitlePart", "AutoRoutePart", "BodyPart" ],
+  "WithPart": ["CommonPart", "TitlePart", "AutoRoutePart", "BodyPart"],
 
   "Creatable": true,
   "Draftable": true,
@@ -11,76 +10,100 @@
 
   "TableName": "WorkOrderPart",
 
-  "CurrentMigrationNr": 4,
+  "CurrentMigrationNr": 5,
 
   "TableColumn": [
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "Equipment"
+      "PropName": "Equipment",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "Location"
+      "PropName": "Location",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "Department"
+      "PropName": "Department",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "MaintenanceGroup"  //Dropdown
+      "PropName": "MaintenanceGroup",
+      "Enum": true,
+      "EnumName": "PartsEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "MaintenanceGroups", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetMaintenanceGroups"
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "MaintenanceType"
+      "PropName": "MaintenanceType",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "Customer"
+      "PropName": "Customer",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "CustomerTelephone"
+      "PropName": "CustomerTelephone",
+      "Enum": false
     },
     {
       "Version": 1,
       "Type": "string",
-      "PropName": "CustomerContactPerson"
+      "PropName": "CustomerContactPerson",
+      "Enum": false
+
     },
     {
       "Version": 2,
       "Type": "string",
-      "PropName": "RegisteredBy"
+      "PropName": "RegisteredBy",
+      "Enum": false
     },
     {
       "Version": 2,
       "Type": "string",
-      "PropName": "PerformedBy"
+      "PropName": "PerformedBy",
+      "Enum": false
     },
     {
       "Version": 3,
       "Type": "string",
-      "PropName": "Priority"
+      "PropName": "Priority",
+      "Enum": true,
+      "EnumName": "PriorityEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "Priorities", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetPriorities"
     },
     {
       "Version": 3,
       "Type": "string",
-      "PropName": "Protocol"
+      "PropName": "Protocol",
+      "Enum": true,
+      "EnumName": "ProtocolEnum",
+      "ViewModelType": "IEnumerable<SelectListItem>",
+      "ViewModelName": "Protocols", // = Driver.cs Editor Method,  _interfacefield.Getmethod
+      "InterfaceMethod": "GetProtocols"
     },
     {
-      "Version": 4,
-      "Type": "PartsEnum",
-      "PropName": "MainParts"
+      "Version": 5,
+      "Type": "DateTime",
+      "PropName": "PickDate",
+      "Enum": false
     }
-
-
   ],
 
   //Driver.cs  Add in Placement.info
@@ -101,23 +124,11 @@
   "EnumInterface": {
     "InterfaceName": "IWorkOrderService",
     "PrivateFieldName": "_workorderservice",
-    "ParameterConstructor": "workorderservice",
-    "IEnumerableMethod": "GetMaintenanceGroups"
-
-
+    "ParameterConstructor": "workorderservice"
   },
   "ViewModelName": "WorkOrderPartsViewModel",
 
-  "ViewModelProperties": [
-    {
-      "Type": "IEnumerable<SelectListItem>",
-      "Name": "MaintenanceGroups" // = Driver.cs Editor Method,  _interfacefield.Getmethod
-    },
-    {
-      "Type": "WorkOrderPart",  
-      "Name": "Part"    // = Driver.cs Editor Method, (WorkOrderPart part)
-    }
-  ]
-
+  "ViewModelProperties":  {
+                             "Name": "Part"    // = Driver.cs Editor Method, (WorkOrderPart part)
+                          }
 }
-

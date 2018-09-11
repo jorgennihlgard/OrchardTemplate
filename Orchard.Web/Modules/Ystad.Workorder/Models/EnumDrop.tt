@@ -13,16 +13,14 @@ namespace Ystad.Workorder.Models
 {
  <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/DropdownEnum.json"));#>
 
-
-public enum <#=jsonFile["EnumName"]#>
+<#string comma = ",";#>
+<#for(int i = 0; i < jsonFile["Enums"].Count(); i++){#>
+public enum <#=jsonFile["Enums"][i]["Name"]#>
 {
-	<#string comma = ",";#>
-	<#for(int i = 0; i < jsonFile["Selection"].Count(); i++ ){#>
-		<#=jsonFile["Selection"][i] + comma#>
-					
+	<#for(int j = 0; j < jsonFile["Enums"][i]["Selection"].Count(); j++ ){#>
+		<#=jsonFile["Enums"][i]["Selection"][j] + comma#>
 <#}#>
 
 }
-
+<#}#>
 }
-//C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder

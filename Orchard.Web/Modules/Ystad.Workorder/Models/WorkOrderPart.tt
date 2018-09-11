@@ -10,19 +10,20 @@
 
 
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement;
 
 namespace Ystad.Workorder.Models {
-    public class <#=jsonFile["TableName"]#> : ContentPart<<#=jsonFile["TableName"]#>Record> {
+    public class WorkOrderPart : ContentPart<<#=jsonFile["TableName"]#>Record> {
         
 	<#for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#>
 	public <#=jsonFile["TableColumn"][i]["Type"] + " " + jsonFile["TableColumn"][i]["PropName"]#> {
 		get { return Record.<#=jsonFile["TableColumn"][i]["PropName"]#>; }
 		set { Record.<#=jsonFile["TableColumn"][i]["PropName"]#> = value; }
-        }
-		<#}#>
+			}
+	<#}#>
+		
     }
 }

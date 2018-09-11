@@ -5,6 +5,7 @@ using Autofac;
 using Orchard.Environment;
 using Orchard.WarmupStarter;
 
+
 namespace Orchard.Web {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -19,10 +20,11 @@ namespace Orchard.Web {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
-        protected void Application_Start() {
+        protected void Application_Start() { 
             RegisterRoutes(RouteTable.Routes);
             _starter = new Starter<IOrchardHost>(HostInitialization, HostBeginRequest, HostEndRequest);
             _starter.OnApplicationStart(this);
+           
         }
 
         protected void Application_BeginRequest() {

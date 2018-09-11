@@ -15,6 +15,7 @@ using Orchard.Data;
 using Ystad.Workorder.Models;
 using Ystad.Workorder.Services;
 using Ystad.Workorder.ViewModels;
+using AutoMapper;
 
 
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
@@ -23,15 +24,15 @@ using Ystad.Workorder.ViewModels;
 namespace Ystad.Workorder.Drivers {
     public class <#=jsonFile["TableName"]#>Driver : ContentPartDriver<<#=jsonFile["TableName"]#>> {
        
-		  private readonly <#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["PrivateFieldName"]#>;
-
-            public <#=jsonFile["TableName"]#>Driver(
-                <#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["ParameterConstructor"]#> 
-            ) {
-                <#=jsonFile["EnumInterface"]["PrivateFieldName"]#> = <#=jsonFile["EnumInterface"]["ParameterConstructor"]#>;
-            }
-
-
+		  //private readonly <#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["PrivateFieldName"]#>;
+//
+            //public <#=jsonFile["TableName"]#>Driver(
+                //<#=jsonFile["EnumInterface"]["InterfaceName"] + " " + jsonFile["EnumInterface"]["ParameterConstructor"]#> 
+            //) {
+                //<#=jsonFile["EnumInterface"]["PrivateFieldName"]#> = <#=jsonFile["EnumInterface"]["ParameterConstructor"]#>;
+            //}
+//
+//
 
         protected override string Prefix {
             get { return "<#=jsonFile["TemplateView"]#>"; }
@@ -46,14 +47,12 @@ namespace Ystad.Workorder.Drivers {
 
 		protected override DriverResult Editor(WorkOrderPart part, dynamic shapeHelper)
         {
+			WorkOrderPartsViewModel d = Mapper.Map<WorkOrderPart, WorkOrderPartsViewModel>(part);
             return ContentShape("<#=jsonFile["ShapeType"]["Name"]#>",
                 () => shapeHelper.EditorTemplate(
                     TemplateName: "Parts/<#=jsonFile["TemplateView"]#>",
-                    Model: new <#=jsonFile["ViewModelName"]#>
-                    {
-                        <#=jsonFile["ViewModelProperties"][1]["Name"]#> = part,
-                        <#=jsonFile["ViewModelProperties"][0]["Name"]#> = <#=jsonFile["EnumInterface"]["PrivateFieldName"]#>.<#=jsonFile["EnumInterface"]["IEnumerableMethod"]#>(),
-                    },
+						Model: d,
+              
                     Prefix: Prefix));
         }
 
@@ -63,8 +62,8 @@ namespace Ystad.Workorder.Drivers {
 		protected override DriverResult Editor(WorkOrderPart part, IUpdateModel updater, dynamic shapeHelper)
         {
 			  var model = new <#=jsonFile["ViewModelName"]#>()
-			  {
-			      <#=jsonFile["ViewModelProperties"][1]["Name"]#> = part
+			  {	
+			      <#=jsonFile["ViewModelProperties"]["Name"]#> = part
 			  };
 			  if (updater.TryUpdateModel(model, Prefix, null, null))
 			   {

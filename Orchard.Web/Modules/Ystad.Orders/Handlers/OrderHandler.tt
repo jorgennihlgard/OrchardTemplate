@@ -1,0 +1,32 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Orders/Migrationfile.json"));#>
+
+<#	var str = jsonFile["TableName"].ToString();
+var parameterName = Char.ToLowerInvariant(str[0]) + str.Substring(1);
+#>
+using System.Collections.Generic;
+using System.Linq;
+using Orchard.ContentManagement;
+using Orchard.ContentManagement.Handlers;
+using Orchard.Data;
+using Orchard.Indexing;
+using <#=jsonFile["ProjectName"]#>.Models;
+
+namespace <#=jsonFile["ProjectName"]#>.Handlers {
+
+    public class <#=jsonFile["ContentTypeName"].ToString()#>Handler : ContentHandler {
+      
+        public <#=jsonFile["ContentTypeName"]#>Handler(IRepository<<#=jsonFile["TableName"]#>Record> <#=parameterName#>Repository){
+            Filters.Add(StorageFilter.For(<#=parameterName#>Repository));
+		}
+	}
+}

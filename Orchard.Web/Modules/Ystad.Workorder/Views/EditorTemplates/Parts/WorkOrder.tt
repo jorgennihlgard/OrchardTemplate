@@ -1,8 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
-
-
 <#@ import namespace="Newtonsoft.Json.Linq" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
@@ -11,25 +9,52 @@
 <#@ output extension=".cshtml" #>
 
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
+@using Kendo.Mvc.UI;
 @using Ystad.Workorder.ViewModels
-@model <#=jsonFile["ViewModelName"] #>
+
+
+@{
+    Style.Require("kendo.site").AtHead();
+    Script.Require("kendo.web").AtHead();
+    Script.Require("kendo.culture.site").AtHead();
+    Script.Require("kendo.all").AtHead();
+
+    Script.Require("kendo.culture.en-GB").AtHead();
+
+    Style.Require("kendo.commonmaterial").AtHead();
+    Style.Require("kendo.material").AtHead();
+
+}
+
+
 
 @{
     Script.Require("jQuery");
 }
- 
+@model <#=jsonFile["ViewModelName"] #>
+ @using (Html.BeginFormAntiForgeryPost())
+{
+
 
 <fieldset> 
-<label class="sub" for="@Html.IdFor(m => m.<#=jsonFile["ViewModelProperties"][1]["Name"]#>.<#=jsonFile["TableColumn"][3]["PropName"]#>)">@T("<#=jsonFile["TableColumn"][3]["PropName"]#>")</label><br />
-    @(Html.DropDownListFor(m=>Model.<#=jsonFile["ViewModelProperties"][1]["Name"]#>.<#=jsonFile["TableColumn"][3]["PropName"]#>, Model.<#=jsonFile["ViewModelProperties"][0]["Name"] #>))
-          <br />
-
     <legend>@T("Details")</legend>
 
 
-	<#				for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#>
-    @Html.LabelFor(m => m.<#=jsonFile["ViewModelProperties"][1]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>, T("<#=jsonFile["TableColumn"][i]["PropName"]#>"))
-    @Html.TextBoxFor(m => m.<#=jsonFile["ViewModelProperties"][1]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>)
+	<#for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#>
+	<#if((bool)jsonFile["TableColumn"][i]["Enum"]==true){#>
+
+<br /><label class="sub" for="@Html.IdFor(m => m.<#=jsonFile["ViewModelProperties"]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>)">@T("<#=jsonFile["TableColumn"][i]["PropName"]#>")</label><br />
+    @(Html.Kendo().DropDownListFor(m=>Model.<#=jsonFile["ViewModelProperties"]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>).BindTo(Model.<#=jsonFile["TableColumn"][i]["ViewModelName"] #>))
+          <br />
+<#continue;#>
+	<#}#>
+	<#if(jsonFile["TableColumn"][i]["Type"].ToString() == "DateTime"){#>
+		@Html.Kendo().DateTimePickerFor(m => m.<#=jsonFile["ViewModelProperties"]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>)
+	<#continue;#>
+	<#}#>
+    @Html.LabelFor(m => m.<#=jsonFile["ViewModelProperties"]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>, T("<#=jsonFile["TableColumn"][i]["PropName"]#>"))
+    @Html.Kendo().TextBoxFor(m => m.<#=jsonFile["ViewModelProperties"]["Name"]#>.<#=jsonFile["TableColumn"][i]["PropName"]#>)
 <#}#>
     <span class="hint">Enter multiple keywords separated by commas. This is used to generate the Similar Movies list.</span>
 </fieldset>
+}

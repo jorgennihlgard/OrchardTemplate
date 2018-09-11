@@ -1,0 +1,224 @@
+﻿@model PD.Kendo.Models.KendoSiteSettingsPart
+@{
+    Style.Require("kendo.site").AtHead();
+    Script.Require("kendo.web").AtHead();
+    Script.Require("kendo.culture.site").AtHead();
+}
+<legend>@T("Workorder settings")</legend>
+
+
+@using (Script.Head())
+{
+    if (!WorkContext.CurrentCulture.Equals("en-US"))
+    {
+    <script type="text/javascript">
+        kendo.culture("@WorkContext.CurrentSite.SiteCulture");
+    </script>
+    }
+}
+
+@{
+    Script.Require("kendo.web").AtHead();
+    Style.Require("kendo.site").AtHead();
+
+    var defaultTheme = new
+    {
+        Id = Html.FieldIdFor(e => e.DefaultTheme),
+        Name = Html.FieldNameFor(e => e.DefaultTheme),
+
+        Url = Url.Action("Get", "Theme", new { Area = "PD.Kendo" })
+    };    
+}
+
+<fieldset>
+    <div>
+        @Html.LabelFor(e => e.DefaultTheme, T("Preferred Theme"))
+        <input id="@defaultTheme.Id" name="@defaultTheme.Name" style="width: 250px" value="@Model.DefaultTheme" />
+        <p class="hint">
+            Used as the theme in each module if the theme is set correctly, if unset the "Default" theme is selected.
+        </p>
+        <div id="kendo-tab-help">
+            <ul>
+                <li class="k-state-active">What to include</li>
+                <li>Preview</li>
+            </ul>
+            <div>
+                <p>@T("To include the library into your own views all you need is:")</p>
+                <ul class="hint">
+                    <li>@@{</li>
+                    <li>&nbsp;&nbsp;&nbsp;Script.Require("kendo.web").AtHead();</li>
+                    <li>&nbsp;&nbsp;&nbsp;Style.Require("kendo.site").AtHead();</li>
+                    <li>}</li>
+                </ul>
+                <p>@T("For setting the culture this can be done to automatically follow the site settings culture:")</p>
+                <p class="hint">@T("e.g the current") WorkContext.CurrentCulture = "@WorkContext.CurrentCulture". change this in site settings to see any differences.</p>
+                <ul class="hint">
+                    <li>@@{</li>
+                    <li>&nbsp;&nbsp;&nbsp;if(!WorkContext.CurrentCulture.Equals("en-US")){</li>
+                    <li>&nbsp;&nbsp;&nbsp;&lt;script type=&quot;text/javascript&quot;&gt;</li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kendo.culture(&quot;@@WorkContext.CurrentSite.SiteCulture&quot;);</li>
+                    <li>&nbsp;&nbsp;&nbsp;&lt;/script&gt;</li>
+                    <li>&nbsp;&nbsp;&nbsp;}</li>
+                    <li>}</li>
+                </ul>
+            </div>
+            <div>
+                @*@Display(this.New.Help_WidgetBinding())*@
+                 @*@Html.Action("WidgetBinding", "Help", new { Area = "PD.Kendo" })*@
+
+
+                <p>This is just a preview of how the culture and theme are applied</p>
+                <p>visit <a href="http://demos.kendoui.com/web/overview/index.html">kendo demos</a> to see how to implement them</p>
+                <table id="kendoWidgetsTable">
+                    <tr>
+                        <td>
+                            <h4>AutoComplete</h4>
+                            <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>ComboBox</h4>
+                            <select data-role="combobox"
+                                    data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>DatePicker</h4>
+                            <input data-role="datepicker" data-bind="value: datePickerValue" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>DropDownList </h4>
+                            <select data-role="dropdownlist"
+                                    data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Grid</h4>
+                            <div data-role="grid"
+                                 data-sortable="true" data-editable="true"
+                                 data-columns='["Name", "Price", "UnitsInStock", {"command": "destroy"}]'
+                                 data-bind="source: gridSource"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>NumericTextBox</h4>
+                            <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Slider</h4>
+                            <input data-role="slider" data-bind="value: sliderValue" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>TimePicker</h4>
+                            <input data-role="timepicker" data-bind="value: timePickerValue" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>TabStrip</h4>
+                            <div data-role="tabstrip" data-animation="false">
+                                <ul>
+                                    <li class="k-state-active">First</li>
+                                    <li>Second</li>
+                                </ul>
+                                <div>
+                                    <h4>First page:</h4>
+                                    Pick a time: <input data-role="timepicker" data-bind="value: timePickerValue" />
+                                </div>
+                                <div>
+                                    <h4>Second page:</h4>
+                                    Time is: <span data-bind="text: displayTimePickerValue"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>TreeView</h4>
+                            <div data-role="treeview"
+                                 data-animation="false"
+                                 data-drag-and-drop="true"
+                                 data-bind="source: treeviewSource"></div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</fieldset>
+
+
+
+@using (Script.Foot())
+{
+    <script>
+        $(function () {
+            var service = kendoHelp.services.widgets();
+            service.bind($("#kendoWidgetsTable"));
+        });
+    </script>
+}
+
+@{
+    Script.Include("help/widgetbinding.js").AtFoot();
+}
+
+@using (Script.Foot())
+{ 
+    <script>
+        $(document).ready(function() {
+            var combo = $("#@defaultTheme.Id").kendoComboBox({
+                placeholder: "Select theme",
+                dataTextField: "Name",
+                dataValueField: "Value",
+                filter: "contains",
+                highLightFirst: true,
+                //autoBind: false,
+                minLength: 1,
+                dataSource: {
+                    "type": "orchard",
+                    serverFiltering: true,
+                    transport: {
+                        read: {
+                            url: "@defaultTheme.Url",
+                            type: "GET",
+                            data: function () {
+                                var value = $("#@defaultTheme.Id").data("kendoComboBox").text();
+
+                                return value.length === 0 ? null : { text: value };
+                            }
+                            //data: { __RequestVerificationToken: "@Html.AntiForgeryTokenValueOrchard()" }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#kendo-tab-help").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                }
+            });
+        });
+    </script>
+}

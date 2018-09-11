@@ -1,0 +1,27 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#JObject jsonFile1 = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Orders/Migrationfile.json"));#>
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Orders/DropdownEnum.json"));#>
+namespace <#=jsonFile1["ProjectName"]#>.Models
+{
+ 
+
+<#string comma = ",";#>
+<#for(int i = 0; i < jsonFile["Enums"].Count(); i++){#>
+public enum <#=jsonFile["Enums"][i]["Name"]#>
+{
+	<#for(int j = 0; j < jsonFile["Enums"][i]["Selection"].Count(); j++ ){#>
+		<#=jsonFile["Enums"][i]["Selection"][j] + comma#>
+<#}#>
+
+}
+<#}#>
+}

@@ -25,6 +25,9 @@ namespace Ystad.Workorder.Services
 
    public interface <#=jsonFile["EnumInterface"]["InterfaceName"]#> : IDependency
     {
-        IEnumerable<SelectListItem> <#=jsonFile["EnumInterface"]["IEnumerableMethod"]#>();
+		<#for(int i  = 0; i < jsonFile["TableColumn"].Count();i++){#>
+			<#if((bool)jsonFile["TableColumn"][i]["Enum"]==true){#>
+        IEnumerable<SelectListItem> <#=jsonFile["TableColumn"][i]["InterfaceMethod"]#>();
+		<#}}#>
     }
 }

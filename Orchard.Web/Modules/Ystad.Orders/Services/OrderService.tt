@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Orders/Migrationfile.json"));#>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using <#=jsonFile["ProjectName"]#>.Models;
+
+namespace <#=jsonFile["ProjectName"]#>.Services
+{
+
+
+
+    public class OrderService : <#=jsonFile["EnumInterface"]["InterfaceName"]#>
+    {
+			<#for(int i  = 0; i < jsonFile["TableColumn"].Count();i++){#>
+			<#if((bool)jsonFile["TableColumn"][i]["Enum"]==true){#>
+        public IEnumerable<SelectListItem> <#=jsonFile["TableColumn"][i]["InterfaceMethod"]#>()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (var value in Enum.GetValues(typeof(<#=jsonFile["TableColumn"][i]["EnumName"]#>)))
+            {
+                list.Add(new SelectListItem() { Selected = false, Text = value.ToString(), Value = ((int)value).ToString() });
+            }
+            return new SelectList(list, "Value", "Text");
+        }
+	<#}}#>
+    }
+}

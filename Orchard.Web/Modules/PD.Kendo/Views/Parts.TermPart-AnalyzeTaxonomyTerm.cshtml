@@ -1,0 +1,57 @@
+﻿@using Orchard.DisplayManagement.Shapes;
+@using Orchard.ContentManagement;
+@using Orchard.Core.Title.Models;
+@using Orchard.Fields.Fields;
+@using Orchard.MediaLibrary.Fields;
+
+@{
+    Style.Include("Styles.css").AtHead();
+}
+
+@*
+    This shape displays a term and all content items associated to it.
+    - ContentItems is a List shape
+    - Pager is a Pager shape
+    - Taxonomy is the parent taxonomy
+    - ContentPart is the TermPart displayed
+*@
+
+<div>
+    <div class="mywrap">
+        @{
+            var list = Model.ContentItems;
+            var items = list.Items;
+            var count = items.Count;
+
+            var listTag = Tag(list, "ul");
+            listTag.Attributes.Add("style", "list-style:none;");
+            listTag.AddCssClass("flex-container");
+
+            @listTag.StartElement
+
+
+            foreach (var item in items)
+            {
+                var contentItem = (ContentItem)item.ContentItem;
+                var titlePart = contentItem.As<TitlePart>();
+
+                //var imageField = (MediaLibraryPickerField)contentItem.Parts.SelectMany(x => x.Fields).Single(x => x.Name == "Image");
+
+                @Html.Raw("<li class='flex-item'>");
+
+                @T("<a href='{0}'>", @Url.ItemDisplayUrl(contentItem));
+
+
+                @T("<img src ='{0}' width='50px' height='50px'/>", imageField.FirstMediaUrl)
+                @T("<p>{0}</p>", titlePart.Title)
+
+                @Html.Raw("</a>");
+
+                @Html.Raw("</li>");
+
+            }
+
+            @listTag.EndElement
+        }
+    </div>
+</div>

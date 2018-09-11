@@ -1,0 +1,65 @@
+﻿
+@using Kendo.Mvc.UI;
+@using Ystad.Orders.ViewModels
+
+
+@{
+    Style.Require("kendo.site").AtHead();
+    Script.Require("kendo.web").AtHead();
+    Script.Require("kendo.culture.site").AtHead();
+    Script.Require("kendo.all").AtHead();
+
+    Script.Require("kendo.culture.en-GB").AtHead();
+
+    Style.Require("kendo.commonmaterial").AtHead();
+    Style.Require("kendo.material").AtHead();
+
+}
+
+
+
+@{
+    Script.Require("jQuery");
+}
+@model OrderPartsViewModel
+ @using (Html.BeginFormAntiForgeryPost())
+{
+
+
+<fieldset> 
+    <legend>@T("Details")</legend>
+
+
+			    @Html.LabelFor(m => m.Part.Equipment, T("Equipment"))
+    @Html.Kendo().TextBoxFor(m => m.Part.Equipment)
+		    @Html.LabelFor(m => m.Part.Location, T("Location"))
+    @Html.Kendo().TextBoxFor(m => m.Part.Location)
+		    @Html.LabelFor(m => m.Part.Department, T("Department"))
+    @Html.Kendo().TextBoxFor(m => m.Part.Department)
+	
+<br /><label class="sub" for="@Html.IdFor(m => m.Part.MaintenanceGroup)">@T("MaintenanceGroup")</label><br />
+    @(Html.Kendo().DropDownListFor(m=>Model.Part.MaintenanceGroup).BindTo(Model.MaintenanceGroups))
+          <br />
+		    @Html.LabelFor(m => m.Part.MaintenanceType, T("MaintenanceType"))
+    @Html.Kendo().TextBoxFor(m => m.Part.MaintenanceType)
+		    @Html.LabelFor(m => m.Part.Customer, T("Customer"))
+    @Html.Kendo().TextBoxFor(m => m.Part.Customer)
+		    @Html.LabelFor(m => m.Part.CustomerTelephone, T("CustomerTelephone"))
+    @Html.Kendo().TextBoxFor(m => m.Part.CustomerTelephone)
+		    @Html.LabelFor(m => m.Part.CustomerContactPerson, T("CustomerContactPerson"))
+    @Html.Kendo().TextBoxFor(m => m.Part.CustomerContactPerson)
+		    @Html.LabelFor(m => m.Part.RegisteredBy, T("RegisteredBy"))
+    @Html.Kendo().TextBoxFor(m => m.Part.RegisteredBy)
+		    @Html.LabelFor(m => m.Part.PerformedBy, T("PerformedBy"))
+    @Html.Kendo().TextBoxFor(m => m.Part.PerformedBy)
+	
+<br /><label class="sub" for="@Html.IdFor(m => m.Part.Priority)">@T("Priority")</label><br />
+    @(Html.Kendo().DropDownListFor(m=>Model.Part.Priority).BindTo(Model.Priorities))
+          <br />
+	
+<br /><label class="sub" for="@Html.IdFor(m => m.Part.Protocol)">@T("Protocol")</label><br />
+    @(Html.Kendo().DropDownListFor(m=>Model.Part.Protocol).BindTo(Model.Protocols))
+          <br />
+    <span class="hint">Enter multiple keywords separated by commas. This is used to generate the Similar Movies list.</span>
+</fieldset>
+}

@@ -1,7 +1,7 @@
 ﻿
 
 using Orchard.ContentManagement.Records;
-
+using System;
 namespace Ystad.Workorder.Models {
     public class WorkOrderPartRecord : ContentPartRecord {
 
@@ -17,7 +17,7 @@ namespace Ystad.Workorder.Models {
 	public virtual string PerformedBy{ get; set; }
 	public virtual string Priority{ get; set; }
 	public virtual string Protocol{ get; set; }
-	public virtual PartsEnum MainParts{ get; set; }
+	public virtual DateTime PickDate{ get; set; }
   
     }
 }

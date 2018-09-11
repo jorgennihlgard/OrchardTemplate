@@ -6,6 +6,7 @@ using Orchard.Data;
 using Ystad.Workorder.Models;
 using Ystad.Workorder.Services;
 using Ystad.Workorder.ViewModels;
+using AutoMapper;
 
 
 	//In Drivers folder
@@ -13,15 +14,15 @@ using Ystad.Workorder.ViewModels;
 namespace Ystad.Workorder.Drivers {
     public class WorkOrderPartDriver : ContentPartDriver<WorkOrderPart> {
        
-		  private readonly IWorkOrderService _workorderservice;
-
-            public WorkOrderPartDriver(
-                IWorkOrderService workorderservice 
-            ) {
-                _workorderservice = workorderservice;
-            }
-
-
+		  //private readonly IWorkOrderService _workorderservice;
+//
+            //public WorkOrderPartDriver(
+                //IWorkOrderService workorderservice 
+            //) {
+                //_workorderservice = workorderservice;
+            //}
+//
+//
 
         protected override string Prefix {
             get { return "WorkOrder"; }
@@ -36,14 +37,12 @@ namespace Ystad.Workorder.Drivers {
 
 		protected override DriverResult Editor(WorkOrderPart part, dynamic shapeHelper)
         {
+			WorkOrderPartsViewModel d = Mapper.Map<WorkOrderPart, WorkOrderPartsViewModel>(part);
             return ContentShape("Parts_WorkOrder_Edit",
                 () => shapeHelper.EditorTemplate(
                     TemplateName: "Parts/WorkOrder",
-                    Model: new WorkOrderPartsViewModel
-                    {
-                        Part = part,
-                        MaintenanceGroups = _workorderservice.GetMaintenanceGroups(),
-                    },
+						Model: d,
+              
                     Prefix: Prefix));
         }
 
@@ -53,7 +52,7 @@ namespace Ystad.Workorder.Drivers {
 		protected override DriverResult Editor(WorkOrderPart part, IUpdateModel updater, dynamic shapeHelper)
         {
 			  var model = new WorkOrderPartsViewModel()
-			  {
+			  {	
 			      Part = part
 			  };
 			  if (updater.TryUpdateModel(model, Prefix, null, null))

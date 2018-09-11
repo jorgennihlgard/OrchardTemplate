@@ -164,12 +164,46 @@ public int UpdateFrom3(){
 							
 						
 							
-						SchemaBuilder.AlterTable("WorkOrderPartRecord", table =>
-	table.AddColumn<PartsEnum>("MainParts"));
-									
+						
 							
 				           
             return 4;
+	
+			}
+public int UpdateFrom4(){
+
+
+	
+		
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						
+							
+						SchemaBuilder.AlterTable("WorkOrderPartRecord", table =>
+	table.AddColumn<DateTime>("PickDate"));
+									
+							
+				           
+            return 5;
 	
 			}
 		}

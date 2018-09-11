@@ -1,0 +1,10 @@
+﻿Name: PD.Kendo
+AntiForgery: enabled
+Author: ItAutomation AB
+Website: http://www.itautomation.se
+Version: 1.0
+OrchardVersion: 1.9.3
+Description: Telerik Kendo module for Production Discovery 2
+Features:
+    PD.Kendo:
+        Description: Telerik Kendo module for Production Discovery.

@@ -1,0 +1,33 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+
+
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Orders/Migrationfile.json"));#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using Orchard;
+
+namespace <#=jsonFile["ProjectName"]#>.Services
+{
+
+
+   public interface <#=jsonFile["EnumInterface"]["InterfaceName"]#> : IDependency
+    {
+		<#for(int i  = 0; i < jsonFile["TableColumn"].Count();i++){#>
+			<#if((bool)jsonFile["TableColumn"][i]["Enum"]==true){#>
+        IEnumerable<SelectListItem> <#=jsonFile["TableColumn"][i]["InterfaceMethod"]#>();
+		<#}}#>
+    }
+}

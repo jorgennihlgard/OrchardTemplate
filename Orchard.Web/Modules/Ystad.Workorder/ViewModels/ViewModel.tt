@@ -1,0 +1,30 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Ystad.Workorder.Models;
+
+namespace Ystad.Workorder.ViewModels
+{
+<#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
+
+    public class <#=jsonFile["ViewModelName"]#>
+    {<#for(int i = 0; i < jsonFile["TableColumn"].Count(); i++){#> 
+		<#if((bool)jsonFile["TableColumn"][i]["Enum"] == true){#>
+	public <#=jsonFile["TableColumn"][i]["ViewModelType"] + " " + jsonFile["TableColumn"][i]["ViewModelName"]#> { get; set; }
+		<#}#>
+<#}#>
+	public <#=jsonFile["TableName"] + " " + jsonFile["ViewModelProperties"]["Name"]#> { get; set; }
+    }
+}

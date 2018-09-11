@@ -11,7 +11,7 @@
 <#JObject jsonFile = JObject.Parse(File.ReadAllText("C:/Users/sattline/Desktop/Template Project/OrchardTemplate/Orchard-dev/src/Orchard.Web/Modules/Ystad.Workorder/Migrationfile.json"));#>
 
 using Orchard.ContentManagement.Records;
-
+using System;
 namespace Ystad.Workorder.Models {
     public class <#=jsonFile["TableName"].ToString()#>Record : ContentPartRecord {
 
